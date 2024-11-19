@@ -1,0 +1,34 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>{{ news.news_title }}</title>  
+    {% load static %}  
+    <!-- Bootstrap CSS -->  
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">  
+    <style>  
+        .preserve-whitespace {  
+            white-space: pre-wrap; /* 保留所有空白字符 */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container mt-5">  
+        <h2>{{ news.news_title }}</h2>  
+        <div class="card mb-4">  
+            <div class="card-body">  
+                <p><strong>所属网站:</strong> <a href="{{ news.url }}" target="_blank">{{ news.url }}</a></p>  
+ 		<p><strong>网页网址:</strong> <a href="{{ news.suburl }}" target="_blank">{{ news.suburl }}</a></p>  
+                <p><strong>关键词:</strong> {{ news.keyword }}</p>  
+                <p><strong>网页发布时间:</strong> {{ news.news_release_time }}</p>  
+                <h5 class="mt-4"><strong>网页内容:</strong></h5>  
+                <p class="preserve-whitespace">{{ news.news_content }}</p> <!-- 使用CSS类 -->  
+            </div>  
+        </div>  
+        <a href="{% url 'data_list' %}" class="btn btn-secondary">返回列表</a>  
+    </div>  
+    <!-- Bootstrap JS 和依赖 -->  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>  
+</body>  
+</html>

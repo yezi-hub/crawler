@@ -1,0 +1,46 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Login</title>   
+    {% load static %}   
+    <!-- Bootstrap CSS -->  
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">  
+    <style>  
+        /* 设置全屏高度以便于垂直居中 */  
+        .full-height {  
+            height: 100vh; /* 100% 视口高度 */  
+        }  
+        /* 控制表单容器的最大宽度为25% */  
+        .login-container {  
+            max-width:55%;  
+          position: absolute; /* 子元素绝对定位 */  
+    top: 40%;           /* 距离顶端 50% */  
+    left: 50%;          /* 距离左侧 50% */  
+    transform: translate(-50%, -50%); /* 将其中心调整到此点 */ 
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container full-height d-flex justify-content-center align-items-center">  
+        <div class="login-container">  
+            <h2 class="text-center">登    录</h2>  
+            <form method="post">  
+                {% csrf_token %}  
+                <div class="form-group">  
+                    <label for="username">用户名</label>  
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required>  
+                </div>  
+                <div class="form-group">  
+                    <label for="password">密码</label>  
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>  
+                </div>  
+                <button type="submit" class="btn btn-primary btn-block">Login</button>  
+            </form>  
+        </div>  
+    </div>  
+    <!-- Bootstrap JS and dependencies -->  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>  
+</body>  
+</html>

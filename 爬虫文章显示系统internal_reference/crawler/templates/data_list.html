@@ -1,0 +1,54 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Data List</title>  
+	{% load static %}  
+    <!-- Bootstrap CSS -->  
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">  
+    <style>  
+        .search-input {  
+            width: 60%; /* 设置搜索框宽度为50% */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container mt-5">  
+        <h2>Data List</h2>  
+        <form method="get" class="form-inline mb-3">  
+            <input type="text" name="search" class="search-input" value="{{ query }}" placeholder="请输入关键词搜索，多个关键词使用空格分割">  
+            <button type="submit" class="btn btn-primary">搜索</button>  
+        </form>  
+        
+        <ul class="list-group">  
+            {% for data in page_obj %}  
+                <li class="list-group-item">  
+                    <a href="{% url 'news_detail' data.id %}">{{ data.news_title }}</a> - {{ data.keyword }}  
+                </li>  
+            {% empty %}  
+                <li class="list-group-item">No data found.</li>  
+            {% endfor %}  
+        </ul>  
+
+        <div class="mt-4">  
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>  
+            <div class="btn-group" role="group">  
+                {% if page_obj.has_previous %}  
+                    <a href="?page=1&search={{ query }}" class="btn btn-secondary">第一页</a>  
+                    <a href="?page={{ page_obj.previous_page_number }}&search={{ query }}" class="btn btn-secondary">前一页</a>  
+                {% endif %}  
+
+                {% if page_obj.has_next %}  
+                    <a href="?page={{ page_obj.next_page_number }}&search={{ query }}" class="btn btn-secondary">下一页</a>  
+                    <a href="?page={{ page_obj.paginator.num_pages }}&search={{ query }}" class="btn btn-secondary">最后一页</a>  
+                {% endif %}  
+            </div>  
+        </div>  
+        
+        <a href="{% url 'user_logout' %}" class="btn btn-danger mt-3">登 出</a>  
+    </div>  
+    <!-- Bootstrap JS and dependencies -->  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>  
+</body>  
+</html>
